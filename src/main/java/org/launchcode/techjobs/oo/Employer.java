@@ -17,6 +17,7 @@ public class Employer {
         this();
         this.value = value;
     }
+    //Getters/Setters
 
     // Custom toString, equals, and hashCode methods:
 
@@ -38,7 +39,7 @@ public class Employer {
         return Objects.hash(getId());
     }
 
-    // Getters and Setters:
+// Getters and Setters:
 
     public int getId() {
         return id;
