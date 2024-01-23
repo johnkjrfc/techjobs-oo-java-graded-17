@@ -15,7 +15,7 @@ public class PositionType {
 
     public PositionType(String value) {
         this();
-        this.value = value;
+        this.value = (value == null || value.trim().isEmpty()) ? "Data not available" : value;
     }
 
     // TODO: Add a custom toString() method that returns the data stored in 'value'.
@@ -50,6 +50,9 @@ public class PositionType {
 
     public void setValue(String value) {
         this.value = value;
+    }
+    public boolean isEmpty() {
+        return this.value == null || this.value.trim().isEmpty();
     }
 
 }

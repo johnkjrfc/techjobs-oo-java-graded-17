@@ -1,6 +1,13 @@
 package org.launchcode.techjobs.oo;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.annotation.ElementType;
 
 public class Job {
     //Fields. declaring w/out type represents class object
@@ -9,14 +16,19 @@ public class Job {
     private static int nextId = 1;
 
     private String name;
+    @FieldOrder(1)
     private Employer employer;
+    @FieldOrder(2)
     private Location location;
+    @FieldOrder(3)
     private PositionType positionType;
+    @FieldOrder(4)
     private CoreCompetency coreCompetency;
 
     // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
+
     public Job() {
         id = nextId;
         nextId++;
@@ -24,14 +36,14 @@ public class Job {
 
     public Job(String name,Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
         this();
-        this.name = name;
+        this.name = name.isEmpty() ? "Data not available" : name;
         this.employer = employer;
         this.location = location;
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
     }
 
-    // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
+    //  custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
     @Override
     public boolean equals(Object o) {  // Two objects are equal if they have the same id.
@@ -45,7 +57,32 @@ public class Job {
         return Objects.hash(getId());
     }
 
-    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        Map<String, String> fieldMap = new HashMap<>();
+
+        sb.append("\n"); //Start line break
+        sb.append("ID: ").append(this.id).append("\n");
+        sb.append("Name: ").append(this.name).append("\n");
+        sb.append("Employer: ").append(this.employer).append("\n");
+        sb.append("Location: ").append(this.location).append("\n");
+        sb.append("PositionType: ").append(this.positionType).append("\n");
+        sb.append("Core Competency: ").append(this.coreCompetency).append("\n");
+        sb.append("\n"); //end line break
+
+        return sb.toString();
+    }
+
+    //Utility method that adds a space before second capital letter in CamelCase strings
+    private String addSpacesToCamelCase(String input) {
+        //?<!^ : ignore first character in string. "negative lookbehind"
+        //A-Z: look for all capital letters
+        //' $1': add a space before the capital letter
+        return input.replaceAll("(?<!^)([A-Z])", " $1");
+    }
+
+    // getters for each field EXCEPT nextId. setters for each field EXCEPT nextID
     //  and id.
 //Getters
 
@@ -90,7 +127,39 @@ public class Job {
         this.positionType = positionType;
     }
 
-    public void setCoreCompetency(CoreCompetency coreCompetency) {
-        this.coreCompetency = coreCompetency;
-    }
+
+    // SUPER HARD MODE CHALLENGE
+    //toString that grabs any class name, if new fields are added later
+    //StringBuilder sb = new StringBuilder();
+    //        Map<String, String> fieldMap = new HashMap<>();
+    //
+    //        sb.append("\n"); //Start line break
+    //
+    //        //Set ID and Name in our string (primitive types)
+    //        sb.append("ID: ").append(this.id).append("\n");
+    //        sb.append("Name: ").append(this.name).append("\n");
+    //        //Loop through fields in Job
+    //        for (Field field : this.getClass().getDeclaredFields()) {
+    //            field.setAccessible(true);
+    //
+    //            if (field.isAnnotationPresent(FieldOrder.class)) {
+    //                //order stores annotations, which will help sort
+    //                int order = field.getAnnotation(FieldOrder.class).value();
+    //            }
+    //
+    //            try {
+    //                String fieldName = addSpacesToCamelCase(field.getName());
+    //                String fieldValue = field.get(this) == null ? "null": field.get(this).toString();
+    //                fieldMap.put(fieldName, fieldValue);
+    //            } catch (IllegalAccessException e) {
+    //                e.printStackTrace();
+    //            }
+    //        }
+    //
+    //        for (Map.Entry<String, String> entry : fieldMap.entrySet()) {
+    //            sb.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+    //        }
+    //        sb.append("\n"); //end line break
+    //        return sb.toString();
+
 }

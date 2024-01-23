@@ -18,7 +18,7 @@ public class Location {
 
     public Location(String value) {
         this();
-        this.value = value;
+        this.value = (value == null || value.trim().isEmpty()) ? "Data not available" : value;
     }
 
 
@@ -54,6 +54,9 @@ public class Location {
 
     public void setValue(String value) {
         this.value = value;
+    }
+    public boolean isEmpty() {
+        return this.value == null || this.value.trim().isEmpty();
     }
 
 }

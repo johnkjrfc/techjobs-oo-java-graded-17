@@ -18,7 +18,7 @@ public class CoreCompetency {
     //
     public CoreCompetency(String value) {
         this(); //call default constructor, which sets id
-        this.value = value;
+        this.value = (value == null || value.trim().isEmpty()) ? "Data not available" : value;
     }
 
     // Custom toString, equals, and hashCode methods:
@@ -55,5 +55,8 @@ public class CoreCompetency {
 
     public int getId() {
         return id;
+    }
+    public boolean isEmpty() {
+        return this.value == null || this.value.trim().isEmpty();
     }
 }

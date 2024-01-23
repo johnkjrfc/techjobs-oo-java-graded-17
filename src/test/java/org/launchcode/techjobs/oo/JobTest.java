@@ -39,6 +39,24 @@ public class JobTest {
                 new PositionType("Quality control"), new CoreCompetency("Persistence"));
         boolean result = test1.equals(test2);
 
-        assertFalse(result);
+        assertFalse("", result);
+    }
+    @Test
+    public void testJobToStringFormatIsCorrect () {
+        Job test1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
+                new PositionType("Quality control"), new CoreCompetency());
+        String result = test1.toString();
+        String expected = "\n" +
+                "ID: " + test1.getId() + "\n" +
+                "Name: Product tester\n" +
+                "Employer: ACME\n" +
+                "Location: Desert\n" +
+                "Position Type: Quality control\n" +
+                "Core Competency: Data not available\n";
+        assertEquals("Job.toString() formats properly", expected, result);
+        assertEquals("Blank field in constructor has 'Data not available' as value", "Data not available",
+                test1.getCoreCompetency().getValue());
+
+
     }
 }

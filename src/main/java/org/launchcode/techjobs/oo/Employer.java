@@ -15,8 +15,9 @@ public class Employer {
 
     public Employer(String value) {
         this();
-        this.value = value;
+        this.value = (value == null || value.trim().isEmpty()) ? "Data not available" : value;
     }
+
     //Getters/Setters
 
     // Custom toString, equals, and hashCode methods:
@@ -53,4 +54,7 @@ public class Employer {
         this.value = value;
     }
 
+    public boolean isEmpty() {
+        return this.value == null || this.value.trim().isEmpty();
+    }
 }
