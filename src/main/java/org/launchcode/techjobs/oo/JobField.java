@@ -6,11 +6,11 @@ import static java.util.Objects.isNull;
 
 public abstract class JobField {
     //Fields
-    public int id;
+    private int id;
     //class variable. associated to class itself
-    public int nextId = 1;
+    private static int nextId = 1;
     //Var to store description of CC
-    public String value;
+    private String value;
 
     //Constructors
     //set id of object, using private class variable
@@ -32,12 +32,12 @@ public abstract class JobField {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof JobField that)) return false;
-        return id == that.id;
+        return getId() == that.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId());
     }
 
     //Get/Set
