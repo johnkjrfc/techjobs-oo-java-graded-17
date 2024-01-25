@@ -42,9 +42,9 @@ public class JobTest {
         assertFalse("", result);
     }
     @Test
-    public void testJobToStringFormatIsCorrect () {
+    public void testToStringContainsCorrectLabelsAndData () {
         Job test1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
-                new PositionType("Quality control"), new CoreCompetency(""));
+                new PositionType("Quality control"), new CoreCompetency("Java"));
         String result = test1.toString();
         String lb = System.lineSeparator();
         String expected = lb +
@@ -53,11 +53,32 @@ public class JobTest {
                 "Employer: ACME" + lb +
                 "Location: Desert" + lb +
                 "Position Type: Quality control" + lb +
-                "Core Competency: Data not available" + lb;
+                "Core Competency: Java" + lb;
         assertEquals("Job.toString() formats properly", expected, result);
+    }
+    @Test
+    public void testToStringHandlesEmptyField () {
+        Job test1 = new Job("", new Employer(""), new Location(""),
+                new PositionType(""), new CoreCompetency(""));
+        assertEquals("Blank field in constructor has 'Data not available' as value", "Data not available",
+                test1.getName());
+        assertEquals("Blank field in constructor has 'Data not available' as value", "Data not available",
+                test1.getEmployer().getValue());
+        assertEquals("Blank field in constructor has 'Data not available' as value", "Data not available",
+                test1.getLocation().getValue());
+        assertEquals("Blank field in constructor has 'Data not available' as value", "Data not available",
+                test1.getPositionType().getValue());
         assertEquals("Blank field in constructor has 'Data not available' as value", "Data not available",
                 test1.getCoreCompetency().getValue());
+    }
+    @Test
+    public void testToStringStartsAndEndsWithNewLine () {
+        Job test1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
+                new PositionType("Quality control"), new CoreCompetency(""));
+        String result = test1.toString();
+        String lb = System.lineSeparator();
 
-
+        assertTrue("String starts with new line", result.startsWith(lb));
+        assertTrue("String ends with new line", result.endsWith(lb));
     }
 }
