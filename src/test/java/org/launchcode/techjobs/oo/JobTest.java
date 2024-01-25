@@ -44,15 +44,16 @@ public class JobTest {
     @Test
     public void testJobToStringFormatIsCorrect () {
         Job test1 = new Job("Product tester", new Employer("ACME"), new Location("Desert"),
-                new PositionType("Quality control"), new CoreCompetency());
+                new PositionType("Quality control"), new CoreCompetency(""));
         String result = test1.toString();
-        String expected = "\n" +
-                "ID: " + test1.getId() + "\n" +
-                "Name: Product tester\n" +
-                "Employer: ACME\n" +
-                "Location: Desert\n" +
-                "Position Type: Quality control\n" +
-                "Core Competency: Data not available\n";
+        String lb = System.lineSeparator();
+        String expected = lb +
+                "ID: " + test1.getId() + lb +
+                "Name: Product tester" + lb +
+                "Employer: ACME" + lb +
+                "Location: Desert" + lb +
+                "Position Type: Quality control" + lb +
+                "Core Competency: Data not available" + lb;
         assertEquals("Job.toString() formats properly", expected, result);
         assertEquals("Blank field in constructor has 'Data not available' as value", "Data not available",
                 test1.getCoreCompetency().getValue());

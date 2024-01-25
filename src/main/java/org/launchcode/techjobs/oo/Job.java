@@ -59,19 +59,19 @@ public class Job {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Map<String, String> fieldMap = new HashMap<>();
 
-        sb.append("\n"); //Start line break
-        sb.append("ID: ").append(this.id).append("\n");
-        sb.append("Name: ").append(this.name).append("\n");
-        sb.append("Employer: ").append(this.employer).append("\n");
-        sb.append("Location: ").append(this.location).append("\n");
-        sb.append("PositionType: ").append(this.positionType).append("\n");
-        sb.append("Core Competency: ").append(this.coreCompetency).append("\n");
-        sb.append("\n"); //end line break
+        String lb = System.lineSeparator();
+        return lb +//Start line break
+        "ID: " + this.id + lb +
+        "Name: " + this.name + lb +
+        "Employer: " + this.employer + lb +
+        "Location: " + this.location + lb +
+        "Position Type: " + this.positionType + lb +
+        "Core Competency: " + this.coreCompetency + lb
+        ;
+        //end line break
 
-        return sb.toString();
+
     }
 
     //Utility method that adds a space before second capital letter in CamelCase strings

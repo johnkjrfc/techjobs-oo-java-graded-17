@@ -54,7 +54,5 @@ public class Employer {
         this.value = value;
     }
 
-    public boolean isEmpty() {
-        return this.value == null || this.value.trim().isEmpty();
-    }
+
 }

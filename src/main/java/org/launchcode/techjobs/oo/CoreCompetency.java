@@ -2,6 +2,8 @@ package org.launchcode.techjobs.oo;
 
 import java.util.Objects;
 
+import static java.util.Objects.isNull;
+
 public class CoreCompetency {
 //Fields
     private int id;
@@ -18,7 +20,7 @@ public class CoreCompetency {
     //
     public CoreCompetency(String value) {
         this(); //call default constructor, which sets id
-        this.value = (value == null || value.trim().isEmpty()) ? "Data not available" : value;
+        this.value = (isNull(value) || value.trim().isEmpty()) ? "Data not available" : value;
     }
 
     // Custom toString, equals, and hashCode methods:
@@ -56,7 +58,5 @@ public class CoreCompetency {
     public int getId() {
         return id;
     }
-    public boolean isEmpty() {
-        return this.value == null || this.value.trim().isEmpty();
-    }
+
 }
